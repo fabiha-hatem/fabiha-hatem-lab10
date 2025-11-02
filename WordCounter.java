@@ -41,7 +41,7 @@ public class WordCounter {
     }
         
 
-    public static StringBuffer processFile(String path) throws EmptyFileException{
+    public static StringBuffer processFile(String path) throws EmptyFileException {
         // return StringBuffer holding all contents of the file 
         // when you try to open the file and it doesnt exsist yo have to catch a filenotfundexception 
         Scanner sc = new Scanner(System.in); 
@@ -61,7 +61,7 @@ public class WordCounter {
                 rd.close();
 
                 if(contents.length() == 0){
-                throw new EmptyFileException(curr + "was empty");
+                throw new EmptyFileException(curr + " was empty");
                 
                 }
 
@@ -126,7 +126,8 @@ public class WordCounter {
                 text = processFile(input); 
             } catch (EmptyFileException e){
                 System.out.println(e); 
-                text = new StringBuffer("");
+                return;
+                
                 
             }
         } else if (option == 2){
@@ -134,7 +135,7 @@ public class WordCounter {
         }
         try {
             int count = processText(text, stopword); 
-            System.out.println("Found" + count + "words");  
+            System.out.println("Found" + " " + count +  " words.");  
         } catch (InvalidStopwordException e){
             System.out.println(e);
             System.out.println("new stopword"); 
@@ -142,7 +143,7 @@ public class WordCounter {
 
             try{
                 int count = processText (text, newStopword);
-                System.out.println("Found" + count + "words");
+                System.out.println("Found" + " " + count +  " words.");
 
             } catch (InvalidStopwordException e2){
                 System.out.println(e2); 

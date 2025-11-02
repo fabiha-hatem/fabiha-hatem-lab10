@@ -4,7 +4,7 @@ public class EmptyFileException extends IOException {
         super(message);
     }
     public String toString(){
-        return "EmptyFileException" + getMessage();
+        return "EmptyFileException: " + getMessage();
     }
     
 }
