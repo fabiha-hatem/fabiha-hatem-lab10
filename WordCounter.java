@@ -33,7 +33,7 @@ public class WordCounter {
         }
 
         if (num < 5 ){
-            throw new TooSmallText("Only found " + num + " words");
+            throw new TooSmallText("Only found " + num + " words.");
         }
 
         return num; 

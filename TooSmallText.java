@@ -4,6 +4,6 @@ public class TooSmallText extends Exception{
     }
 
     public String toString(){
-        return "TooSmallText" + getMessage();
+        return "TooSmallText: " + getMessage();
     }
 }
