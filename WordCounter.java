@@ -26,15 +26,18 @@ public class WordCounter {
                 found = true;
                 break;
             }
+            
+        }
+
+        if (num < 5 ){
+            throw new TooSmallText("Only found " + num + " words.");
         }
 
         if(stopword != null && !found){
             throw new InvalidStopwordException("Couldn't find stopword: " + stopword);
         }
 
-        if (num < 5 ){
-            throw new TooSmallText("Only found " + num + " words.");
-        }
+        
 
         return num; 
 
