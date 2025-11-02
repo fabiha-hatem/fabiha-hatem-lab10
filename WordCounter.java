@@ -13,21 +13,23 @@ public class WordCounter {
         // if it's less then five words it will throw toosmall even if the stopword is fousn 
         // text is args[0]
         // stopwors is arrgs[0]
-        Pattern regex = Pattern.compile("[a-zA-Z_0-9]+");
+        Pattern regex = Pattern.compile("[a-zA-Z_0-9']+");
         Matcher regexMatcher = regex.matcher(text); 
         int num = 0; 
         boolean found = false;
+        int temp = 0; 
         
         while(regexMatcher.find()){
             String word = regexMatcher.group();
             num++; 
 
-            if (stopword != null && word.equals(stopword)){
+            if (stopword != null && word.equals(stopword) && !found ){
                 found = true;
-                break;
+                temp = num;
             }
             
         }
+    
 
         if (num < 5 ){
             throw new TooSmallText("Only found " + num + " words.");
@@ -36,10 +38,12 @@ public class WordCounter {
         if(stopword != null && !found){
             throw new InvalidStopwordException("Couldn't find stopword: " + stopword);
         }
+        if (stopword != null && found){
+            return temp;
+        }else { 
+            return num; 
 
-        
-
-        return num; 
+        }
 
     }
         
@@ -57,14 +61,14 @@ public class WordCounter {
                 String line; 
 
                 while((line = rd.readLine()) != null){
-                contents.append(line);
+                    contents.append(line);
                 
                 }
 
                 rd.close();
 
                 if(contents.length() == 0){
-                throw new EmptyFileException(curr + " was empty");
+                    throw new EmptyFileException(curr + " was empty");
                 
                 }
 
@@ -73,10 +77,11 @@ public class WordCounter {
             } catch (FileNotFoundException e ){
                 System.out.println("file not found"); 
                 curr = sc.nextLine();
+            } catch (EmptyFileException e){
+                throw e; 
             } catch (IOException e){
                 System.out.println("reading error"); 
-                return contents; 
-
+                return contents;  
             }
             
         } 
@@ -129,7 +134,7 @@ public class WordCounter {
                 text = processFile(input); 
             } catch (EmptyFileException e){
                 System.out.println(e); 
-                return;
+                text = new StringBuffer();
                 
                 
             }
